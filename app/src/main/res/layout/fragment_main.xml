@@ -1,0 +1,45 @@
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="WeatherSnap"
+        android:id="@+id/titleTextView" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Check Weather"
+        android:id="@+id/checkWeatherButton"
+        android:layout_marginTop="20dp"
+        android:onClick="checkWeather" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weather Online"
+        android:id="@+id/onlineTextView"
+        android:layout_marginTop="30dp"
+        android:onClick="weatherOnline" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Weather Map"
+        android:id="@+id/mapTextView"
+        android:layout_marginTop="30dp"
+        android:onClick="weatherMap"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take Photo"
+        android:id="@+id/photoTextView"
+        android:layout_marginTop="30dp"
+        android:onClick="takePhoto"/>
+</LinearLayout>
