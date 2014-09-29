@@ -1,8 +1,9 @@
 package com.nicksuch.weathersnap;
 
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
@@ -60,6 +61,12 @@ public class MapActivity extends FragmentActivity {
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(38.0704545,-84.4917396)).title("Lexmarker"));
+        LatLng lexington = new LatLng(38.0368,-84.496);
+        LatLng lexmark = new LatLng(38.0704545,-84.4917396);
+        LatLng awesome = new LatLng(38.042164,-84.4925411);
+        mMap.setMyLocationEnabled(true);
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(lexington, 12));
+        mMap.addMarker(new MarkerOptions().position(lexmark).title("Lexmarker").snippet("Where are are now!"));
+        mMap.addMarker(new MarkerOptions().position(awesome).title("Awesome Inc").snippet("Where this app was born!"));
     }
 }
