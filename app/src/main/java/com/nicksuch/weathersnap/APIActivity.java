@@ -99,6 +99,7 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
     public class FetchWeatherTask extends AsyncTask<String, Void, String[]> {
 
         private final String LOG_TAG = FetchWeatherTask.class.getSimpleName();
+        String city;
 
         /* The date/time conversion code is going to be moved outside the asynctask later,
          * so for convenience we're breaking it out into its own method now.
@@ -141,6 +142,8 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
             final String OWM_MIN = "min";
             final String OWM_DATETIME = "dt";
             final String OWM_DESCRIPTION = "main";
+            final String OWM_CITY = "city";
+            final String OWM_CITY_NAME = "name";
 
             JSONObject forecastJson = new JSONObject(forecastJsonStr);
             JSONArray weatherArray = forecastJson.getJSONArray(OWM_LIST);
@@ -171,19 +174,17 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
                 double high = temperatureObject.getDouble(OWM_MAX);
                 double low = temperatureObject.getDouble(OWM_MIN);
 
-                highAndLow = formatHighLows(high, low);
-                resultStrs[i] = day + " - " + description + " - " + highAndLow;
+                JSONObject cityObject = forecastJson.getJSONObject(OWM_CITY);
+                city = cityObject.getString(OWM_CITY_NAME);
 
-                // Fill textView with today's forecast
-                Log.v(LOG_TAG, "Current weather: " + resultStrs[0]);
-                TextView currentWeather = (TextView) findViewById(R.id.currentWeatherTextView);
-                currentWeather.setText(resultStrs[0]);
+                highAndLow = formatHighLows(high, low);
+                resultStrs[i] = "Current weather in " + city + ": \n" + day + " - " + description + " - " + highAndLow;
             }
 
             for (String s : resultStrs) {
                 Log.v(LOG_TAG, "Forecast entry: " + s);
             }
-
+            Log.v(LOG_TAG, "City: " + city);
             return resultStrs;
         }
 
@@ -289,6 +290,10 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
                 for (String dayForecastStr : result) {
                     mForecastAdapter.add(dayForecastStr);
                 }
+                // Fill textView with today's forecast
+                Log.v(LOG_TAG, "Current weather: " + mForecastAdapter.getItem(0));
+                TextView currentWeather = (TextView) findViewById(R.id.currentWeatherTextView);
+                currentWeather.setText(mForecastAdapter.getItem(0));
             }
         }
     }

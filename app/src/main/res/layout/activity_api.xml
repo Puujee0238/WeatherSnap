@@ -16,8 +16,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/zipCodeEditText"
-        android:text="Zip Code"
-        android:selectAllOnFocus="true" />
+        android:imeOptions="actionNext"
+        android:hint="Zip Code" />
 
     <Button
         android:layout_width="wrap_content"
