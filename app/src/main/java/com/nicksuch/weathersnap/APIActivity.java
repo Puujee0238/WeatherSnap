@@ -3,16 +3,14 @@ package com.nicksuch.weathersnap;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import org.json.JSONArray;
@@ -32,20 +30,15 @@ import java.util.Date;
 import java.util.List;
 
 
-public class ZipCodeActivity extends ActionBarActivity {
+public class APIActivity extends ActionBarActivity implements View.OnClickListener {
 
-    TextView currentWeatherTextView;
     private ArrayAdapter<String> mForecastAdapter;
+    public final static String EXTRA_MESSAGE = "com.nicksuch.weathersnap.MESSAGE";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_zip_code);
-        if (savedInstanceState == null) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }
+        setContentView(R.layout.activity_api);
 
         // Create dummy data for ListView
 
@@ -64,16 +57,28 @@ public class ZipCodeActivity extends ActionBarActivity {
 
         mForecastAdapter = new ArrayAdapter<String>(
                 this,
-                R.layout.fragment_zip_code,
+                R.layout.activity_api,
                 R.id.currentWeatherTextView,
                 weekForecast);
+
+        Button button = (Button)findViewById(R.id.getWeatherButton);
+        button.setOnClickListener(this);
+    }
+
+    public void onClick(View view) {
+        final String LOG_TAG = APIActivity.class.getSimpleName();
+        FetchWeatherTask weatherTask = new FetchWeatherTask();
+        EditText editText = (EditText) findViewById(R.id.zipCodeEditText);
+        String zipCode = editText.getText().toString();
+        Log.v(LOG_TAG, "Zip Code: " + zipCode);
+        weatherTask.execute(zipCode);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.zip_code, menu);
+        getMenuInflater().inflate(R.menu.api, menu);
         return true;
     }
 
@@ -87,30 +92,6 @@ public class ZipCodeActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment implements View.OnClickListener {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_zip_code, container, false);
-            Button button = (Button)rootView.findViewById(R.id.getWeatherButton);
-            button.setOnClickListener(this);
-            return rootView;
-        }
-
-        @Override
-        public void onClick(View view) {
-            FetchWeatherTask weatherTask = new FetchWeatherTask();
-            weatherTask.execute("40507");
-        }
     }
 
     // Stock Code to Fetch Weather
@@ -192,6 +173,11 @@ public class ZipCodeActivity extends ActionBarActivity {
 
                 highAndLow = formatHighLows(high, low);
                 resultStrs[i] = day + " - " + description + " - " + highAndLow;
+
+                // Fill textView with today's forecast
+                Log.v(LOG_TAG, "Current weather: " + resultStrs[0]);
+                TextView currentWeather = (TextView) findViewById(R.id.currentWeatherTextView);
+                currentWeather.setText(resultStrs[0]);
             }
 
             for (String s : resultStrs) {

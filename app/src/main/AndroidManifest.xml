@@ -25,14 +25,6 @@
             android:value="@string/google_maps_key" />
 
         <activity
-            android:name=".ZipCodeActivity"
-            android:label="@string/title_activity_zip_code"
-            android:parentActivityName=".MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.nicksuch.weathersnap.MainActivity" />
-        </activity>
-        <activity
             android:name=".WebActivity"
             android:label="@string/title_activity_web"
             android:parentActivityName=".MainActivity" >
@@ -51,6 +43,14 @@
         <activity
             android:name=".PhotoActivity"
             android:label="@string/title_activity_photo"
+            android:parentActivityName=".MainActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.nicksuch.weathersnap.MainActivity" />
+        </activity>
+        <activity
+            android:name=".APIActivity"
+            android:label="@string/title_activity_api"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

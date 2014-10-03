@@ -61,7 +61,7 @@ public class MainActivity extends ActionBarActivity {
     }
 
     public void checkWeather(View view) {
-        Intent intent = new Intent(this, ZipCodeActivity.class);
+        Intent intent = new Intent(this, APIActivity.class);
         startActivity(intent);
     }
 
