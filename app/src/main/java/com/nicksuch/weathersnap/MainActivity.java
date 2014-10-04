@@ -10,6 +10,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.parse.Parse;
+
 
 public class MainActivity extends ActionBarActivity {
 
@@ -22,6 +24,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
+        Parse.initialize(this, "QSQ2VgUmVWZT4DKq31dWjzaGv0uVfpDzyDHpmdRs", "CLC2xjQJlFaKJQWseuAVvjVziWbhcEYqP1Gzujbo");
     }
 
 
