@@ -25,7 +25,7 @@ public class MainActivity extends ActionBarActivity {
                     .add(R.id.container, new PlaceholderFragment())
                     .commit();
         }
-        ParseObject.registerSubclass(Weather.class);
+        ParseObject.registerSubclass(Report.class);
         Parse.initialize(this, "QSQ2VgUmVWZT4DKq31dWjzaGv0uVfpDzyDHpmdRs", "CLC2xjQJlFaKJQWseuAVvjVziWbhcEYqP1Gzujbo");
         ParseUser.enableAutomaticUser();
         ParseACL defaultACL = new ParseACL();

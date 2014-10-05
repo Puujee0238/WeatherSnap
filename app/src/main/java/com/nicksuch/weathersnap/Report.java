@@ -8,10 +8,10 @@ import com.parse.ParseUser;
 /**
  * Created by nicksuch on 10/4/14.
  */
-@ParseClassName("Weather")
-public class Weather extends ParseObject {
+@ParseClassName("Report")
+public class Report extends ParseObject {
 
-    public Weather() {
+    public Report() {
         // A default constructor is required.
     }
 

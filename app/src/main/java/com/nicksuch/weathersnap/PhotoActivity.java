@@ -10,11 +10,11 @@ import android.view.WindowManager;
 
 public class PhotoActivity extends ActionBarActivity {
 
-    private Weather weather;
+    private Report report;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        weather = new Weather();
+        report = new Report();
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
@@ -26,13 +26,14 @@ public class PhotoActivity extends ActionBarActivity {
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
 
         if (fragment == null) {
-            fragment = new NewMealFragment();
+            fragment = new NewReportFragment();
             manager.beginTransaction().add(R.id.fragmentContainer, fragment)
                     .commit();
         }
-
-
     }
 
+    public Report getCurrentReport() {
+        return report;
+    }
 
 }
