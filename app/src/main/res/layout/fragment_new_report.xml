@@ -12,13 +12,13 @@
         android:textSize="20sp" />
 
     <EditText
-        android:id="@+id/meal_name"
+        android:id="@+id/report_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textMultiLine" />
 
     <Spinner
-        android:id="@+id/rating_spinner"
+        android:id="@+id/conditions_spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 
@@ -41,7 +41,7 @@
         android:text="@string/cancel_button_text" />
 
     <com.parse.ParseImageView
-        android:id="@+id/meal_preview_image"
+        android:id="@+id/report_preview_image"
         android:layout_width="wrap_content"
         android:layout_height="200dp" />
 

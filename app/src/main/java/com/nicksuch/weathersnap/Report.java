@@ -31,12 +31,12 @@ public class Report extends ParseObject {
         put("author", user);
     }
 
-    public String getRating() {
-        return getString("rating");
+    public String getConditions() {
+        return getString("conditions");
     }
 
-    public void setRating(String rating) {
-        put("rating", rating);
+    public void setConditions(String conditions) {
+        put("conditions", conditions);
     }
 
     public ParseFile getPhotoFile() {

@@ -13,7 +13,7 @@
     <string name="save_button_text">Save</string>
     <string name="cancel_button_text">Cancel</string>
 
-    <string-array name="ratings_array">
+    <string-array name="conditions_array">
         <item>Cloudy</item>
         <item>Sunny</item>
         <item>Windy</item>

@@ -20,7 +20,7 @@ public class PhotoActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
 
         // Begin with main data entry view,
-        // NewMealFragment
+        // PhotoFragment
         setContentView(R.layout.activity_photo);
         FragmentManager manager = getFragmentManager();
         Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);

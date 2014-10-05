@@ -27,10 +27,10 @@ import com.parse.SaveCallback;
 
 /*
  * This fragment manages the data entry for a
- * new Weather object. It lets the user input a
- * weather name, give it a rating, and take a
+ * new Report object. It lets the user input a
+ * report name, describe the conditions, and take a
  * photo. If there is already a photo associated
- * with this weather, it will be displayed in the
+ * with this report, it will be displayed in the
  * preview at the bottom, which is a standalone
  * ParseImageView.
  */
@@ -39,9 +39,9 @@ public class NewReportFragment extends Fragment {
     private ImageButton photoButton;
     private Button saveButton;
     private Button cancelButton;
-    private TextView mealName;
-    private Spinner mealRating;
-    private ParseImageView mealPreview;
+    private TextView reportName;
+    private Spinner reportConditions;
+    private ParseImageView reportPreview;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,16 +53,15 @@ public class NewReportFragment extends Fragment {
                              Bundle SavedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_new_report, parent, false);
 
-        mealName = ((EditText) v.findViewById(R.id.meal_name));
+        reportName = ((EditText) v.findViewById(R.id.report_name));
 
-        // The mealRating spinner lets people assign favorites of meals they've
-        // eaten.
-        // Meals with 4 or 5 ratings will appear in the Favorites view.
-        mealRating = ((Spinner) v.findViewById(R.id.rating_spinner));
+        // The reportConditions spinner lets people assign conditions to reports they're
+        // making.
+        reportConditions = ((Spinner) v.findViewById(R.id.conditions_spinner));
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter
-                .createFromResource(getActivity(), R.array.ratings_array,
+                .createFromResource(getActivity(), R.array.conditions_array,
                         android.R.layout.simple_spinner_dropdown_item);
-        mealRating.setAdapter(spinnerAdapter);
+        reportConditions.setAdapter(spinnerAdapter);
 
         photoButton = ((ImageButton) v.findViewById(R.id.photo_button));
         photoButton.setOnClickListener(new View.OnClickListener() {
@@ -71,7 +70,7 @@ public class NewReportFragment extends Fragment {
             public void onClick(View v) {
                 InputMethodManager imm = (InputMethodManager) getActivity()
                         .getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(mealName.getWindowToken(), 0);
+                imm.hideSoftInputFromWindow(reportName.getWindowToken(), 0);
                 startCamera();
             }
         });
@@ -81,23 +80,23 @@ public class NewReportFragment extends Fragment {
 
             @Override
             public void onClick(View v) {
-                Report meal = ((PhotoActivity) getActivity()).getCurrentReport();
+                Report report = ((PhotoActivity) getActivity()).getCurrentReport();
 
-                // When the user clicks "Save," upload the meal to Parse
-                // Add data to the meal object:
-                meal.setTitle(mealName.getText().toString());
+                // When the user clicks "Save," upload the report to Parse
+                // Add data to the report object:
+                report.setTitle(reportName.getText().toString());
 
-                // Associate the meal with the current user
-                meal.setAuthor(ParseUser.getCurrentUser());
+                // Associate the report with the current user
+                report.setAuthor(ParseUser.getCurrentUser());
 
-                // Add the rating
-                meal.setRating(mealRating.getSelectedItem().toString());
+                // Add the conditions
+                report.setConditions(reportConditions.getSelectedItem().toString());
 
                 // If the user added a photo, that data will be
                 // added in the CameraFragment
 
-                // Save the meal and return
-                meal.saveInBackground(new SaveCallback() {
+                // Save the report and return
+                report.saveInBackground(new SaveCallback() {
 
                     @Override
                     public void done(ParseException e) {
@@ -128,19 +127,19 @@ public class NewReportFragment extends Fragment {
         });
 
         // Until the user has taken a photo, hide the preview
-        mealPreview = (ParseImageView) v.findViewById(R.id.meal_preview_image);
-        mealPreview.setVisibility(View.INVISIBLE);
+        reportPreview = (ParseImageView) v.findViewById(R.id.report_preview_image);
+        reportPreview.setVisibility(View.INVISIBLE);
 
         return v;
     }
 
     /*
-     * All data entry about a Meal object is managed from the NewMealActivity.
+     * All data entry about a Report object is managed from the NewReportActivity.
      * When the user wants to add a photo, we'll start up a custom
-     * CameraFragment that will let them take the photo and save it to the Meal
-     * object owned by the NewMealActivity. Create a new CameraFragment, swap
-     * the contents of the fragmentContainer (see activity_new_meal.xml), then
-     * add the NewMealFragment to the back stack so we can return to it when the
+     * CameraFragment that will let them take the photo and save it to the Report
+     * object owned by the NewReportActivity. Create a new CameraFragment, swap
+     * the contents of the fragmentContainer (see activity_new_report.xml), then
+     * add the NewReportFragment to the back stack so we can return to it when the
      * camera is finished.
      */
     public void startCamera() {
@@ -148,12 +147,12 @@ public class NewReportFragment extends Fragment {
         FragmentTransaction transaction = getActivity().getFragmentManager()
                 .beginTransaction();
         transaction.replace(R.id.fragmentContainer, cameraFragment);
-        transaction.addToBackStack("NewMealFragment");
+        transaction.addToBackStack("NewReportFragment");
         transaction.commit();
     }
 
     /*
-     * On resume, check and see if a meal photo has been set from the
+     * On resume, check and see if a report photo has been set from the
      * CameraFragment. If it has, load the image in this fragment and make the
      * preview image visible.
      */
@@ -163,11 +162,11 @@ public class NewReportFragment extends Fragment {
         ParseFile photoFile = ((PhotoActivity) getActivity())
                 .getCurrentReport().getPhotoFile();
         if (photoFile != null) {
-            mealPreview.setParseFile(photoFile);
-            mealPreview.loadInBackground(new GetDataCallback() {
+            reportPreview.setParseFile(photoFile);
+            reportPreview.loadInBackground(new GetDataCallback() {
                 @Override
                 public void done(byte[] data, ParseException e) {
-                    mealPreview.setVisibility(View.VISIBLE);
+                    reportPreview.setVisibility(View.VISIBLE);
                 }
             });
         }
