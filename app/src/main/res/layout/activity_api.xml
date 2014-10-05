@@ -8,16 +8,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Choose a Zip Code"
+        android:text="View Current Weather in a City"
         android:id="@+id/titleTextView"
         android:layout_marginBottom="20dp" />
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/zipCodeEditText"
+        android:id="@+id/cityEditText"
         android:imeOptions="actionNext"
-        android:hint="Zip Code" />
+        android:hint="City name" />
 
     <Button
         android:layout_width="wrap_content"
@@ -29,7 +29,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Current weather in ##### is..."
+        android:text="Current weather in selected city is..."
         android:id="@+id/currentWeatherTextView" />
 
 </LinearLayout>

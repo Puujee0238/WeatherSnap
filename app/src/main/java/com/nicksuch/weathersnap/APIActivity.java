@@ -68,10 +68,10 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
     public void onClick(View view) {
         final String LOG_TAG = APIActivity.class.getSimpleName();
         FetchWeatherTask weatherTask = new FetchWeatherTask();
-        EditText editText = (EditText) findViewById(R.id.zipCodeEditText);
-        String zipCode = editText.getText().toString();
-        Log.v(LOG_TAG, "Zip Code: " + zipCode);
-        weatherTask.execute(zipCode);
+        EditText editText = (EditText) findViewById(R.id.cityEditText);
+        String city = editText.getText().toString();
+        Log.v(LOG_TAG, "City: " + city);
+        weatherTask.execute(city);
     }
 
 
@@ -88,7 +88,7 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_reload) {
+        if (id == R.id.action_alternate) {
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -191,7 +191,7 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
         @Override
         protected String[] doInBackground(String... params) {
 
-            // If there's no zip code, there's nothing to look up. Verify params.
+            // If there's no city name, there's nothing to look up. Verify params.
             if (params.length == 0) return null;
 
             // These two need to be declared outside the try/catch
@@ -203,7 +203,7 @@ public class APIActivity extends ActionBarActivity implements View.OnClickListen
             String forecastJsonStr = null;
 
             String format = "json";
-            String units = "metric";
+            String units = "imperial";
             int numDays = 7;
 
             try {

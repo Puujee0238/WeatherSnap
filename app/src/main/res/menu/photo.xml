@@ -2,8 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.nicksuch.weathersnap.PhotoActivity" >
-    <item android:id="@+id/action_reload"
-        android:title="@string/action_reload"
+    <item android:id="@+id/action_alternate"
+        android:title="@string/action_alternate"
         android:orderInCategory="100"
         app:showAsAction="never" />
 </menu>

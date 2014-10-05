@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">Weather Snap</string>
-    <string name="action_reload">Reload</string>
+    <string name="action_alternate">Load Alternate</string>
     <string name="title_activity_web">Weather Website</string>
     <string name="title_activity_map">Weather Map</string>
     <string name="title_activity_photo">Weather Photos</string>
