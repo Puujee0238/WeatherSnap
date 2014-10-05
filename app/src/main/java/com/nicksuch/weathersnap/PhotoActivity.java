@@ -1,44 +1,38 @@
 package com.nicksuch.weathersnap;
 
+import android.app.Fragment;
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.view.Menu;
-import android.view.MenuItem;
-
-import com.parse.ParseObject;
+import android.view.Window;
+import android.view.WindowManager;
 
 
 public class PhotoActivity extends ActionBarActivity {
 
+    private Weather weather;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        weather = new Weather();
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
         super.onCreate(savedInstanceState);
+
+        // Begin with main data entry view,
+        // NewMealFragment
         setContentView(R.layout.activity_photo);
-        ParseObject testObject = new ParseObject("TestObject");
-        testObject.put("foo", "bar");
-        testObject.saveInBackground();
-    }
+        FragmentManager manager = getFragmentManager();
+        Fragment fragment = manager.findFragmentById(R.id.fragmentContainer);
 
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.photo, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        if (fragment == null) {
+            fragment = new NewMealFragment();
+            manager.beginTransaction().add(R.id.fragmentContainer, fragment)
+                    .commit();
         }
-        return super.onOptionsItemSelected(item);
-    }
 
+
+    }
 
 
 }
